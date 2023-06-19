@@ -9,19 +9,20 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { ArgsType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { CustomerWhereInput } from "./CustomerWhereInput";
+import { Type } from "class-transformer";
 
-@InputType()
-class UserWhereUniqueInput {
+@ArgsType()
+class CustomerCountArgs {
   @ApiProperty({
-    required: true,
-    type: String,
+    required: false,
+    type: () => CustomerWhereInput,
   })
-  @IsString()
-  @Field(() => String)
-  id!: string;
+  @Field(() => CustomerWhereInput, { nullable: true })
+  @Type(() => CustomerWhereInput)
+  where?: CustomerWhereInput;
 }
 
-export { UserWhereUniqueInput as UserWhereUniqueInput };
+export { CustomerCountArgs as CustomerCountArgs };

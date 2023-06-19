@@ -15,8 +15,8 @@ import { Prisma, Event, Customer } from "@prisma/client";
 export class EventServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
-  async count<T extends Prisma.EventFindManyArgs>(
-    args: Prisma.SelectSubset<T, Prisma.EventFindManyArgs>
+  async count<T extends Prisma.EventCountArgs>(
+    args: Prisma.SelectSubset<T, Prisma.EventCountArgs>
   ): Promise<number> {
     return this.prisma.event.count(args);
   }

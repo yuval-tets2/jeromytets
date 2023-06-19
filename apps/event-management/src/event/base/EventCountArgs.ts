@@ -10,12 +10,19 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { ArgsType, Field } from "@nestjs/graphql";
-import { UserCreateInput } from "./UserCreateInput";
+import { ApiProperty } from "@nestjs/swagger";
+import { EventWhereInput } from "./EventWhereInput";
+import { Type } from "class-transformer";
 
 @ArgsType()
-class CreateUserArgs {
-  @Field(() => UserCreateInput, { nullable: false })
-  data!: UserCreateInput;
+class EventCountArgs {
+  @ApiProperty({
+    required: false,
+    type: () => EventWhereInput,
+  })
+  @Field(() => EventWhereInput, { nullable: true })
+  @Type(() => EventWhereInput)
+  where?: EventWhereInput;
 }
 
-export { CreateUserArgs as CreateUserArgs };
+export { EventCountArgs as EventCountArgs };

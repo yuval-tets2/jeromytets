@@ -12,6 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { ArgsType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { EventWhereInput } from "./EventWhereInput";
+import { IsOptional, ValidateNested, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { EventOrderByInput } from "./EventOrderByInput";
 
@@ -21,6 +22,8 @@ class EventFindManyArgs {
     required: false,
     type: () => EventWhereInput,
   })
+  @IsOptional()
+  @ValidateNested()
   @Field(() => EventWhereInput, { nullable: true })
   @Type(() => EventWhereInput)
   where?: EventWhereInput;
@@ -29,6 +32,8 @@ class EventFindManyArgs {
     required: false,
     type: [EventOrderByInput],
   })
+  @IsOptional()
+  @ValidateNested({ each: true })
   @Field(() => [EventOrderByInput], { nullable: true })
   @Type(() => EventOrderByInput)
   orderBy?: Array<EventOrderByInput>;
@@ -37,6 +42,8 @@ class EventFindManyArgs {
     required: false,
     type: Number,
   })
+  @IsOptional()
+  @IsInt()
   @Field(() => Number, { nullable: true })
   @Type(() => Number)
   skip?: number;
@@ -45,6 +52,8 @@ class EventFindManyArgs {
     required: false,
     type: Number,
   })
+  @IsOptional()
+  @IsInt()
   @Field(() => Number, { nullable: true })
   @Type(() => Number)
   take?: number;
